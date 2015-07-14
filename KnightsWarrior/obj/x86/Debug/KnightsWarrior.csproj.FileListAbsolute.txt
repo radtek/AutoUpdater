@@ -1,0 +1,10 @@
+E:\MN测试Project\AutoUpdater\AutoUpdater\Debug\AutoUpdater.Config
+E:\MN测试Project\AutoUpdater\AutoUpdater\Debug\KnightsWarrior.exe.config
+E:\MN测试Project\AutoUpdater\AutoUpdater\Debug\KnightsWarrior.exe
+E:\MN测试Project\AutoUpdater\AutoUpdater\Debug\KnightsWarrior.pdb
+E:\MN测试Project\AutoUpdater\AutoUpdater\KnightsWarrior\obj\x86\Debug\KnightsWarrior.csprojResolveAssemblyReference.cache
+E:\MN测试Project\AutoUpdater\AutoUpdater\KnightsWarrior\obj\x86\Debug\KnightsWarrior.UpdateForm.resources
+E:\MN测试Project\AutoUpdater\AutoUpdater\KnightsWarrior\obj\x86\Debug\KnightsWarrior.Properties.Resources.resources
+E:\MN测试Project\AutoUpdater\AutoUpdater\KnightsWarrior\obj\x86\Debug\KnightsWarrior.csproj.GenerateResource.Cache
+E:\MN测试Project\AutoUpdater\AutoUpdater\KnightsWarrior\obj\x86\Debug\KnightsWarrior.exe
+E:\MN测试Project\AutoUpdater\AutoUpdater\KnightsWarrior\obj\x86\Debug\KnightsWarrior.pdb

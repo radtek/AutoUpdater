@@ -1,0 +1,15 @@
+E:\MN测试Project\AutoUpdater\AutoUpdater\Debug\CreateXmlTools.exe.config
+E:\MN测试Project\AutoUpdater\AutoUpdater\Debug\CreateXmlTools.exe
+E:\MN测试Project\AutoUpdater\AutoUpdater\Debug\CreateXmlTools.pdb
+E:\MN测试Project\AutoUpdater\AutoUpdater\IIS服务器工具\CreateXmlTools.exe.config
+E:\MN测试Project\AutoUpdater\AutoUpdater\IIS服务器工具\CreateXmlTools.exe
+E:\MN测试Project\AutoUpdater\AutoUpdater\IIS服务器工具\CreateXmlTools.pdb
+E:\MN测试Project\AutoUpdater\AutoUpdater\Debug\IIS服务器工具\CreateXmlTools.exe.config
+E:\MN测试Project\AutoUpdater\AutoUpdater\Debug\IIS服务器工具\CreateXmlTools.exe
+E:\MN测试Project\AutoUpdater\AutoUpdater\Debug\IIS服务器工具\CreateXmlTools.pdb
+E:\MN测试Project\AutoUpdater\AutoUpdater\CreateXmlTools\obj\x86\Debug\CreateXmlTools.FormMain.resources
+E:\MN测试Project\AutoUpdater\AutoUpdater\CreateXmlTools\obj\x86\Debug\CreateXmlTools.Properties.Resources.resources
+E:\MN测试Project\AutoUpdater\AutoUpdater\CreateXmlTools\obj\x86\Debug\CreateXmlTools.csproj.GenerateResource.Cache
+E:\MN测试Project\AutoUpdater\AutoUpdater\CreateXmlTools\obj\x86\Debug\CreateXmlTools.exe
+E:\MN测试Project\AutoUpdater\AutoUpdater\CreateXmlTools\obj\x86\Debug\CreateXmlTools.pdb
+E:\MN测试Project\AutoUpdater\AutoUpdater\CreateXmlTools\obj\x86\Debug\CreateXmlTools.csprojResolveAssemblyReference.cache

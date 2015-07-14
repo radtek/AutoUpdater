@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<updateFiles>
+  <file path="CreateXmlTools.csproj.FileListAbsolute.txt" url="http://localhost:8032/CreateXmlTools.csproj.FileListAbsolute.txt" lastver="" size="742" needRestart="false" version="ac5743dc-1463-4463-8cfb-1aedc4df00f4" />
+  <file path="CreateXmlTools.csproj.GenerateResource.Cache" url="http://localhost:8032/CreateXmlTools.csproj.GenerateResource.Cache" lastver="" size="978" needRestart="false" version="8e5d48ba-7624-42f8-8442-d392a5c5c0c4" />
+  <file path="CreateXmlTools.FormMain.resources" url="http://localhost:8032/CreateXmlTools.FormMain.resources" lastver="" size="38644" needRestart="false" version="fd0a921a-c5fd-41c0-8298-6b147e4c2c86" />
+  <file path="CreateXmlTools.pdb" url="http://localhost:8032/CreateXmlTools.pdb" lastver="" size="24064" needRestart="false" version="a6878339-80fc-4ecd-a522-f5e1404bace8" />
+  <file path="CreateXmlTools.Properties.Resources.resources" url="http://localhost:8032/CreateXmlTools.Properties.Resources.resources" lastver="" size="180" needRestart="false" version="d1579849-b252-4c8d-8fe9-7ee7eebd3383" />
+  <file path="DesignTimeResolveAssemblyReferencesInput.cache" url="http://localhost:8032/DesignTimeResolveAssemblyReferencesInput.cache" lastver="" size="6271" needRestart="false" version="51332c3f-1056-4a3d-8c86-5aff87a00b5d" />
+</updateFiles>

@@ -1,0 +1,9 @@
+E:\MN测试Project\AutoUpdater\AutoUpdater\Debug\AutoUpdater.dll
+E:\MN测试Project\AutoUpdater\AutoUpdater\Debug\AutoUpdater.pdb
+E:\MN测试Project\AutoUpdater\AutoUpdater\AutoUpdater\obj\Debug\KnightsWarriorAutoupdater.DownloadConfirm.resources
+E:\MN测试Project\AutoUpdater\AutoUpdater\AutoUpdater\obj\Debug\KnightsWarriorAutoupdater.DownloadProgress.resources
+E:\MN测试Project\AutoUpdater\AutoUpdater\AutoUpdater\obj\Debug\AutoUpdater.Properties.Resources.resources
+E:\MN测试Project\AutoUpdater\AutoUpdater\AutoUpdater\obj\Debug\AutoUpdater.csproj.GenerateResource.Cache
+E:\MN测试Project\AutoUpdater\AutoUpdater\AutoUpdater\obj\Debug\AutoUpdater.dll
+E:\MN测试Project\AutoUpdater\AutoUpdater\AutoUpdater\obj\Debug\AutoUpdater.pdb
+E:\MN测试Project\AutoUpdater\AutoUpdater\AutoUpdater\obj\Debug\AutoUpdater.csprojResolveAssemblyReference.cache
