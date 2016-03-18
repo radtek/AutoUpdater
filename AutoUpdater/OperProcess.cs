@@ -21,6 +21,7 @@ namespace AutoUpdater
         }
         #endregion init update env
 
+
         #region updated start process
         public void StartProcess()
         {
@@ -34,6 +35,7 @@ namespace AutoUpdater
         }
 
         #endregion
+
 
         #region 启动进程、关闭进程、判断进程是否存在
         //启动exe绝对路径
