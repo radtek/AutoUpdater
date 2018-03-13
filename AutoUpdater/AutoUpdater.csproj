@@ -83,6 +83,7 @@
     <Compile Include="AutoUpdateHelper\LocalFile.cs" />
     <Compile Include="AutoUpdateHelper\RemoteFile.cs" />
     <Compile Include="AutoUpdateHelper\UpdateFileList.cs" />
+    <Compile Include="AutoUpdateHelper\AutoUpdaterConsole.cs" />
     <Compile Include="DownloadConfirm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -102,6 +103,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="DownloadProgressCls.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="DownloadConfirm.resx">

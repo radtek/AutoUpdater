@@ -90,7 +90,7 @@ namespace CreateXmlTools
             foreach (FileInfo f in dicInfo.GetFiles())
             {
                 //排除当前目录中生成xml文件的工具文件
-                if (f.Name != "CreateXmlTools.exe" && f.Name != "AutoupdateService.xml" && !f.Name.Contains("CreateXmlTools"))
+                if (f.Name != "CreateXmlTools.exe" && f.Name != "AutoupdateService.xml" && !f.Name.Contains("CreateXmlTools") && f.Name != "web.config")
                 {
                     string path = dicInfo.FullName.Replace(currentDirectory, "").Replace("\\", "/");
                     string folderPath=string.Empty;

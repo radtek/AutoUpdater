@@ -1,34 +1,20 @@
-/*****************************************************************
- * Copyright (C) Knights Warrior Corporation. All rights reserved.
- * 
- * Author:    •µÓ∆Ô ø£®Knights Warrior£© 
- * Email:    KnightsWarrior@msn.com
- * Website:  http://www.cnblogs.com/KnightsWarrior/       http://knightswarrior.blog.51cto.com/
- * Create Date:  5/8/2010 
- * Usage:
- *
- * RevisionHistory
- * Date         Author               Description
- * 
-*****************************************************************/
-using System;
+Ôªøusing System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
+using System.Linq;
 using System.Text;
-using System.Windows.Forms;
+using System.Diagnostics;
+using KnightsWarriorAutoupdater;
 using System.Threading;
 using System.Net;
 using System.IO;
-using System.Diagnostics;
-using System.Xml;
-using System.Collections.Generic;
-using System.Linq;
+using System.ComponentModel;
 
-namespace KnightsWarriorAutoupdater
+namespace AutoUpdater
 {
-    public partial class DownloadProgress : Form
+    /// <summary>
+    /// ‰ª•ÊéßÂà∂Âè∞ÊñπÂºèËøõË°åÊìç‰Ωú
+    /// </summary>
+    public class DownloadProgressCls
     {
         #region The private fields
         private bool isFinished = false;
@@ -39,14 +25,14 @@ namespace KnightsWarriorAutoupdater
         private WebClient clientDownload = null;
         private string curBakFolderName = ConstFile.TEMPFOLDERNAME+"\\"+DateTime.Now.ToString("yyyy-MM-dd");
         Config config = new Config();
-        int tryTimes = 0;//≥¢ ‘œ¬‘ÿ¥Œ ˝;
+        int tryTimes = 0;//Â∞ùËØï‰∏ãËΩΩÊ¨°Êï∞;
         NLog.Logger _log = null;
         #endregion
 
         #region The constructor of DownloadProgress
-        public DownloadProgress(List<DownloadFileInfo> downloadFileListTemp,Config _config)
+        public   DownloadProgressCls(List<DownloadFileInfo> downloadFileListTemp, Config _config)
         {
-            InitializeComponent();
+           
             config = _config;
             int.TryParse(config.TryTimes, out tryTimes);
             this.downloadFileList = downloadFileListTemp;
@@ -55,41 +41,45 @@ namespace KnightsWarriorAutoupdater
             {
                 allFileList.Add(file);
             }
-            //≥ı ºªØ»’÷æ—°‘Ò∆˜
+            //ÂàùÂßãÂåñÊó•ÂøóÈÄâÊã©Âô®
             try
             {
                 _log = NLog.LogManager.GetCurrentClassLogger();
 
             }
             catch (Exception ex)
-            { }
+            {
+                _log.Info(ex.Message);
+            }
+
+            OnFormLoad();
         }
         #endregion
 
         #region The method and event
-        private void OnFormClosing(object sender, FormClosingEventArgs e)
+        /// <summary>
+        /// ÂÖ≥Èó≠
+        /// </summary>
+        private void OnFormClosing()
         {
-            if (!isFinished && DialogResult.No == MessageBox.Show(ConstFile.CANCELORNOT, ConstFile.MESSAGETITLE, MessageBoxButtons.YesNo, MessageBoxIcon.Question))
-            {
-                e.Cancel = true;
-                return;
-            }
-            else
-            {
+           
                 if (clientDownload != null)
                     clientDownload.CancelAsync();
 
                 evtDownload.Set();
                 evtPerDonwload.Set();
-            }
+         
         }
-
-        private void OnFormLoad(object sender, EventArgs e)
+        /// <summary>
+        /// ÂàùÂßãÂåñ
+        /// </summary>
+        private void OnFormLoad()
         {
             //config = Config.LoadConfig(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, ConstFile.FILENAME));
             evtDownload = new ManualResetEvent(true);
             evtDownload.Reset();
-            ThreadPool.QueueUserWorkItem(new WaitCallback(this.ProcDownload));
+            this.ProcDownload(new object());
+            //ThreadPool.QueueUserWorkItem(new WaitCallback(this.ProcDownload));
         }
 
         long total = 0;
@@ -132,7 +122,7 @@ namespace KnightsWarriorAutoupdater
                     // clientDownload.Proxy = System.Net.WebProxy.GetDefaultProxy();
                     clientDownload.Proxy = WebRequest.GetSystemWebProxy();
                     clientDownload.Proxy.Credentials = CredentialCache.DefaultCredentials;
-                    //clientDownload.Credentials = System.Net.CredentialCache.DefaultCredentials;//ftpø…ƒ‹≤ªø…”√
+                    //clientDownload.Credentials = System.Net.CredentialCache.DefaultCredentials;//ftpÂèØËÉΩ‰∏çÂèØÁî®
                     if (!string.IsNullOrEmpty(config.PassWord) && !string.IsNullOrEmpty(config.UserName))
                     {
                         clientDownload.Credentials = new NetworkCredential(config.UserName, config.PassWord);
@@ -149,8 +139,9 @@ namespace KnightsWarriorAutoupdater
                         {
                             this.SetProcessBar(e.ProgressPercentage, (int)((nDownloadedTotal + e.BytesReceived) * 100 / total));
                         }
-                        catch
+                        catch(Exception ex)
                         {
+                            _log.Info(ex.Message);
                             //log the error message,you can use the application's log code
                         }
 
@@ -165,9 +156,11 @@ namespace KnightsWarriorAutoupdater
                             nDownloadedTotal += dfile.Size;
                             this.SetProcessBar(0, (int)(nDownloadedTotal * 100 / total));
                             evtPerDonwload.Set();
+                            Console.WriteLine(dfile.FileName + "‰∏ãËΩΩÊàêÂäü");
                         }
-                        catch (Exception)
+                        catch (Exception ex)
                         {
+                            _log.Info(ex.Message);
                             //log the error message,you can use the application's log code
                         }
 
@@ -199,22 +192,22 @@ namespace KnightsWarriorAutoupdater
                     clientDownload.Dispose();
                     clientDownload = null;
 
-                    #region ø…ƒ‹ª·Ω¯––œ¬‘ÿ ß∞‹£¨Ω¯––∂‡¥Œ÷ÿ–¬œ¬‘ÿ
+                    #region ÂèØËÉΩ‰ºöËøõË°å‰∏ãËΩΩÂ§±Ë¥•ÔºåËøõË°åÂ§öÊ¨°ÈáçÊñ∞‰∏ãËΩΩ
                     string tempUrlPath = CommonUnitity.GetFolderUrl(file, curBakFolderName);
                      var newPath = Path.Combine(CommonUnitity.SystemBinUrl + curBakFolderName + tempUrlPath, file.FileName);
                      System.IO.FileInfo f = new FileInfo(newPath);
   
                      if (file.TryTimes < tryTimes && !file.Size.ToString().Equals(f.Length.ToString()) && !file.FileName.ToString().EndsWith(".xml"))
                      {
-                        //œ¬‘ÿ≥ˆ¥Ì£¨Ω¯––÷ÿ ‘
-                         file.TryTimes += 1;//≥¢ ‘¥Œ ˝µ›‘ˆ
+                        //‰∏ãËΩΩÂá∫ÈîôÔºåËøõË°åÈáçËØï
+                         file.TryTimes += 1;//Â∞ùËØïÊ¨°Êï∞ÈÄíÂ¢û
                          var curItem = config.UpdateFileList.Where(c => c.Version == file.Version).FirstOrDefault();
                          if (curItem != null)
                          {
-                             curItem.TryTimes += 1;// ß∞‹µƒŒƒº˛≤ª±£¥Ê,”√”⁄œ¬¥Œ÷ÿ∆Ù
+                             curItem.TryTimes += 1;//Â§±Ë¥•ÁöÑÊñá‰ª∂‰∏ç‰øùÂ≠ò,Áî®‰∫é‰∏ãÊ¨°ÈáçÂêØ
                          }
                          if (_log != null)
-                             _log.Info(string.Format("Œƒº˛{0}:{1}œ¬‘ÿ ß∞‹∫ÛΩ¯––¡Àµ⁄{2}¥Œ÷ÿ ‘œ¬‘ÿ\n\r", file.DownloadUrl, file.Version, file.TryTimes));
+                             _log.Info(string.Format("Êñá‰ª∂{0}:{1}‰∏ãËΩΩÂ§±Ë¥•ÂêéËøõË°å‰∫ÜÁ¨¨{2}Ê¨°ÈáçËØï‰∏ãËΩΩ\n\r", file.DownloadUrl, file.Version, file.TryTimes));
                      }
                      else
                      {
@@ -225,8 +218,9 @@ namespace KnightsWarriorAutoupdater
                 }
 
             }
-            catch (Exception)
+            catch (Exception exp)
             {
+                _log.Info(exp.Message);
                 ShowErrorAndRestartApplication();
                 //throw;
             }
@@ -241,6 +235,7 @@ namespace KnightsWarriorAutoupdater
             DealWithDownloadErrors();
 
             //Debug.WriteLine("All Downloaded");
+           
             foreach (DownloadFileInfo file in this.allFileList)
             {
                 string tempUrlPath = CommonUnitity.GetFolderUrl(file, curBakFolderName);
@@ -262,7 +257,7 @@ namespace KnightsWarriorAutoupdater
                     //just deal with the problem which the files EndsWith xml can not download
                     System.IO.FileInfo f = new FileInfo(newPath);
                     //errorMessageStr.AppendFormat("{0},", file.FileFullName);
-                    //2015.5.11Œƒº˛≤ª¥Ê‘⁄ø…“‘Ω¯––øΩ±¥xml
+                    //2015.5.11Êñá‰ª∂‰∏çÂ≠òÂú®ÂèØ‰ª•ËøõË°åÊã∑Ë¥ùxml
                     if (!file.Size.ToString().Equals(f.Length.ToString()) && !file.FileName.ToString().EndsWith(".xml"))
                     {
                         //<LocalFile path="packages.config" lastver="" size="370" version="e0d3579f-44ba-4e99-b557-de2b37d9f588" />
@@ -271,7 +266,7 @@ namespace KnightsWarriorAutoupdater
                         var curItem = config.UpdateFileList.Where(c => c.Version == file.Version).FirstOrDefault();
                         if (curItem != null)
                         {
-                            config.UpdateFileList.Remove(curItem);// ß∞‹µƒŒƒº˛≤ª±£¥Ê,”√”⁄œ¬¥Œ÷ÿ∆Ù
+                            config.UpdateFileList.Remove(curItem);//Â§±Ë¥•ÁöÑÊñá‰ª∂‰∏ç‰øùÂ≠ò,Áî®‰∫é‰∏ãÊ¨°ÈáçÂêØ
                         }
                         
                        continue;
@@ -290,12 +285,13 @@ namespace KnightsWarriorAutoupdater
                                 newPath = newPath.Substring(0, newPath.Length - 1);
                                 oldPath = oldPath.Substring(0, oldPath.Length - 1);
                             }
+                            _log.Info(string.Format("{0}->{1}", newfilepath, newPath));
                             File.Copy(newfilepath, newPath,true);
                         }
                     }
                     //End added
 
-                    if (File.Exists(oldPath))//Œƒº˛¥Ê‘⁄
+                    if (File.Exists(oldPath))//Êñá‰ª∂Â≠òÂú®
                     {
                         MoveFolderToOld(oldPath, newPath);
                     }
@@ -325,6 +321,7 @@ namespace KnightsWarriorAutoupdater
                 }
                 catch (Exception exp)
                 {
+                    _log.Info(exp.Message);
                     //log the error message,you can use the application's log code
                 }
 
@@ -336,13 +333,13 @@ namespace KnightsWarriorAutoupdater
             if (!string.IsNullOrEmpty(errorMessageStr.ToString()))
             {
                 if (_log!=null)
-                _log.Info(string.Format("∏¸–¬ƒ⁄»›≥ˆ¥Ì£¨Œﬁ¥Û–°ªÚ’ﬂœ¬‘ÿ≥ˆ¥ÌŒƒº˛»Áœ¬£¨ø…≥¢ ‘ ÷∂Ø∏¸–¬£¨≤¢≈‰÷√IISŒ™ø…∑√Œ œ¬‘ÿ{0}", errorMessageStr.ToString()));
+                _log.Info(string.Format("Êõ¥Êñ∞ÂÜÖÂÆπÂá∫ÈîôÔºåÊó†Â§ßÂ∞èÊàñËÄÖ‰∏ãËΩΩÂá∫ÈîôÊñá‰ª∂Â¶Ç‰∏ãÔºåÂèØÂ∞ùËØïÊâãÂä®Êõ¥Êñ∞ÔºåÂπ∂ÈÖçÁΩÆIIS‰∏∫ÂèØËÆøÈóÆ‰∏ãËΩΩ{0}", errorMessageStr.ToString()));
                 //CommonUnitity.RestartApplication();
             }
             else
             {
                 if (_log != null)
-                _log.Info(string.Format("±æ¥Œ∏¸–¬≥…π¶∏ˆ ˝Œ™:{0}", config.UpdateFileList.Count()));
+                _log.Info(string.Format("Êú¨Ê¨°Êõ¥Êñ∞ÊàêÂäü‰∏™Êï∞‰∏∫:{0}", config.UpdateFileList.Count()));
             }
 
 
@@ -358,20 +355,21 @@ namespace KnightsWarriorAutoupdater
         //To delete or move to old files
         void MoveFolderToOld(string oldPath, string newPath)
         {
-            //2015.5.12–ﬁ∏ƒ≤ªÃÌº”Old◊÷∂Œ
+            //2015.5.12‰øÆÊîπ‰∏çÊ∑ªÂä†OldÂ≠óÊÆµ
            if (File.Exists(oldPath + ".old"))
                 File.Delete(oldPath + ".old");
 
             //if (File.Exists(oldPath))
             //    File.Move(oldPath, oldPath + ".old");
             //
-            //»Áπ˚.configŒƒº˛¥Ê‘⁄‘Ú≤ªΩ¯––∏¥÷∆
+            //Â¶ÇÊûú.configÊñá‰ª∂Â≠òÂú®Âàô‰∏çËøõË°åÂ§çÂà∂
            if (File.Exists(oldPath) && oldPath.Substring(oldPath.LastIndexOf(".") + 1).Equals(ConstFile.CONFIGFILE))
             {
 
             }
             else
             {
+                //_log.Info(string.Format("{0}=>{1}", newPath, oldPath));
                 File.Copy(newPath, oldPath,true);
             }
             //File.Delete(oldPath + ".old");
@@ -380,54 +378,25 @@ namespace KnightsWarriorAutoupdater
         delegate void ShowCurrentDownloadFileNameCallBack(string name);
         private void ShowCurrentDownloadFileName(string name)
         {
-            if (this.labelCurrentItem.InvokeRequired)
-            {
-                ShowCurrentDownloadFileNameCallBack cb = new ShowCurrentDownloadFileNameCallBack(ShowCurrentDownloadFileName);
-                this.Invoke(cb, new object[] { name });
-            }
-            else
-            {
-                this.labelCurrentItem.Text = name;
-            }
+            
         }
 
         delegate void SetProcessBarCallBack(int current, int total);
         private void SetProcessBar(int current, int total)
         {
-            if (this.progressBarCurrent.InvokeRequired)
-            {
-                SetProcessBarCallBack cb = new SetProcessBarCallBack(SetProcessBar);
-                this.Invoke(cb, new object[] { current, total });
-            }
-            else
-            {
-                if (current > 100)
-                {
-                    current = 100;
-                }
-                this.progressBarCurrent.Value = current;
-                if (total > 100)
-                { 
-                total=100;
-                }
-                this.progressBarTotal.Value = total;
-            }
+             
         }
 
         delegate void ExitCallBack(bool success);
         private void Exit(bool success)
         {
-            if (this.InvokeRequired)
+           
+            this.isFinished = success;
+            if (this.isFinished)
             {
-                ExitCallBack cb = new ExitCallBack(Exit);
-                this.Invoke(cb, new object[] { success });
+                config.SaveConfig(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, ConstFile.FILENAME));
             }
-            else
-            {
-                this.isFinished = success;
-                this.DialogResult = success ? DialogResult.OK : DialogResult.Cancel;
-                this.Close();
-            }
+            Environment.Exit(0);
         }
 
         private void OnCancel(object sender, EventArgs e)
@@ -437,9 +406,7 @@ namespace KnightsWarriorAutoupdater
              // evtPerDonwload.Set();
             ShowErrorAndRestartApplication();
         }
-
-      
-
+         
         private void DealWithDownloadErrors()
         {
             try
@@ -476,9 +443,6 @@ namespace KnightsWarriorAutoupdater
 
         #endregion
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
+       
     }
 }

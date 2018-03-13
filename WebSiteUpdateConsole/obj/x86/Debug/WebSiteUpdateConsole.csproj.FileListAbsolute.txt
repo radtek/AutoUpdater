@@ -1,0 +1,3 @@
+F:\MN测试Project\AutoUpdater\AutoUpdater\WebSiteUpdateConsole\bin\Debug\AutoUpdater.Config
+F:\MN测试Project\AutoUpdater\AutoUpdater\WebSiteUpdateConsole\bin\Debug\WebSiteUpdateConsole.exe
+F:\MN测试Project\AutoUpdater\AutoUpdater\WebSiteUpdateConsole\bin\Debug\WebSiteUpdateConsole.pdb

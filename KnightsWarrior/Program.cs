@@ -15,7 +15,7 @@ namespace WEBSiteUpdate
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-             var form=new UpdateForm() ;
+           var form=new UpdateForm() ;
         }
     }
 }

@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreateXmlTools", "CreateXml
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WEBSiteUpdate", "KnightsWarrior\WEBSiteUpdate.csproj", "{3D59BF04-B491-421E-A76F-C6FE406D003B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSiteUpdateConsole", "WebSiteUpdateConsole\WebSiteUpdateConsole.csproj", "{8603831F-5568-41C1-B74A-94611B506F45}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,16 @@ Global
 		{3D59BF04-B491-421E-A76F-C6FE406D003B}.Release|Mixed Platforms.Build.0 = Release|x86
 		{3D59BF04-B491-421E-A76F-C6FE406D003B}.Release|x86.ActiveCfg = Release|x86
 		{3D59BF04-B491-421E-A76F-C6FE406D003B}.Release|x86.Build.0 = Release|x86
+		{8603831F-5568-41C1-B74A-94611B506F45}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{8603831F-5568-41C1-B74A-94611B506F45}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{8603831F-5568-41C1-B74A-94611B506F45}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{8603831F-5568-41C1-B74A-94611B506F45}.Debug|x86.ActiveCfg = Debug|x86
+		{8603831F-5568-41C1-B74A-94611B506F45}.Debug|x86.Build.0 = Debug|x86
+		{8603831F-5568-41C1-B74A-94611B506F45}.Release|Any CPU.ActiveCfg = Release|x86
+		{8603831F-5568-41C1-B74A-94611B506F45}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{8603831F-5568-41C1-B74A-94611B506F45}.Release|Mixed Platforms.Build.0 = Release|x86
+		{8603831F-5568-41C1-B74A-94611B506F45}.Release|x86.ActiveCfg = Release|x86
+		{8603831F-5568-41C1-B74A-94611B506F45}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

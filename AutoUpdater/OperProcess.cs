@@ -31,7 +31,7 @@ namespace AutoUpdater
             //{
             //    StartExe(path, "MainProgram.exe");
             //}
-            CloseExe("WEBSiteUpdate");
+             CloseExe("WEBSiteUpdate", "WebSiteUpdateConsole");
         }
 
         #endregion
@@ -51,11 +51,14 @@ namespace AutoUpdater
 
 
         //exeName 关闭的exe进程名
-        private void CloseExe(string exeName)
+        private void CloseExe(params string[] exeNames)
         {
-            Process[] arrPro = Process.GetProcessesByName(exeName);
-            foreach (Process pro in arrPro)
-                pro.Kill();
+            foreach (var exeName in exeNames)
+            {
+                Process[] arrPro = Process.GetProcessesByName(exeName);
+                foreach (Process pro in arrPro)
+                    pro.Kill();
+            }
         }
         //processName 进程名
         private bool IfExist(string processName)
